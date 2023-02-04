@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  viajar-no-brasil-front:
+    container_name: viajar-no-brasil-front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - viajar-no-brasil-back
+    env_file:
+      - .env
+    volumes:
+      - .:/viajar-no-brasil-front

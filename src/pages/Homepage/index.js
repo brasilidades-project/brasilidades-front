@@ -1,0 +1,108 @@
+import { Logo, Map, Slogan, Slogan1, Slogan2, Slogan3, Places, PlaceSuggestion, DistrictName, Line, ToClickDiv, ToClickDivText, TopBar, DistrictColumn, MenuIcon, ScrollAd } from '../../components/Homepage';
+import HomepageLayout from '../../layouts/Homepage';
+import { MapBrazil } from 'react-brazil-map';
+import { useEffect, useState } from 'react';
+import Place from '../../components/Homepage/Place';
+import { districtsImages, districtsNames } from '../../components/Homepage/districtsData';
+import { IoMdMenu, IoIosAdd } from 'react-icons/io';
+import Menu from '../../components/Homepage/Menu';
+import PlaceData from '../../components/Homepage/PlaceData';
+import { Grow } from '@material-ui/core';
+export default function Homepage() {
+  const [placesMg, setPlacesMg] = useState([
+    {
+      name: 'Praça do Papa',
+      image: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
+      image2: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
+      image3: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
+      image4: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.',
+      city: 'Belo Horizonte, Minas Gerais',
+      googleMapUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15000.901469699731!2d-43.9148135!3d-19.9570223!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xacdb6ef0826ed46!2sPra%C3%A7a%20Governador%20Israel%20Pinheiro%20(Pra%C3%A7a%20do%20Papa)!5e0!3m2!1spt-BR!2sbr!4v1675486611716!5m2!1spt-BR!2sbr',
+      isPaid: false,
+      hasFood: true,
+      hasCellular: true,
+      hasWc: false,
+      hasGuidance: false,
+      isTrekking: false,
+      needId: false,
+      car: true,
+      airplane: true,
+      boat: false,
+      updatedAt: '02/01/2023'
+    }
+  ]);
+  const [placeSelected, setPlaceSelected] = useState({});
+  const [district, setDistrict] = useState('');
+  const [isSelectDisplay, setIsSelectDisplay] = useState(true);
+  const [isMenuDisplay, setIsMenuDisplay] = useState(false);
+  const [isPlaceDisplay, setIsPlaceDisplay] = useState(false);
+  const [sliderMenu, setSliderMenu] = useState(false);
+  const [sliderPlaceData, setSliderPlaceData] = useState(false);
+  const [toggleGrow, setToggleGrow] = useState(false);
+  const [districtName, setDistrictName] = useState('');
+  const [districtImage, setDistrictImage] = useState(districtsImages.BR);
+  useEffect(() => {
+    if(district !== '') {
+      setIsSelectDisplay(false);
+    }
+    for(let i=0; i<28; i++) {
+      if(Object.keys(districtsImages)[i] === district) {
+        setToggleGrow(false);
+        setDistrictImage(districtsImages[district]);
+        setDistrictName(districtsNames[district]);
+        setTimeout(() => {
+          setToggleGrow(true);
+        }, 500);
+      }
+    }
+  }, [district]);
+  return (
+    <HomepageLayout>
+      { isMenuDisplay ? (
+        <Menu setIsMenuDisplay={setIsMenuDisplay} sliderMenu={sliderMenu} setSliderMenu={setSliderMenu}/>
+      ):(
+        <></>
+      )}
+      { isPlaceDisplay ? (
+        <PlaceData setIsPlaceDisplay={setIsPlaceDisplay} placeSelected={placeSelected} sliderPlaceData={sliderPlaceData} setSliderPlaceData={setSliderPlaceData}/>
+      ):(
+        <></>
+      )}
+      <TopBar>
+        <Logo><p>brasilidades</p></Logo>
+        <Slogan><Slogan1>pesquise,</Slogan1><Slogan2>favorite</Slogan2><Slogan3>e visite</Slogan3></Slogan>
+        { isSelectDisplay ? (
+          <></>
+        ):(
+          <MenuIcon onClick={() => {setIsMenuDisplay(true); setSliderMenu(true);}}><IoMdMenu/></MenuIcon>
+        )}
+      </TopBar>
+      <Map>
+        <MapBrazil onChange={setDistrict} bg='white' fill='black' colorStroke='lightgray' colorLabel='white' width={500} height={500} />
+        { isSelectDisplay ? (
+          <></>
+        ) : (
+          <>
+            <DistrictColumn>
+              <DistrictName><img src={districtImage} alt='Bandeira do Estado'/>{districtName}</DistrictName>
+              <Line></Line>
+              <Places>
+                {placesMg.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData}/>)}
+                <Grow in={toggleGrow} timeout={{ enter: 200, exit: 300 }} mountOnEnter unmountOnExit>
+                  <PlaceSuggestion onClick={() => { window.open('mailto:leonardosouzaf@icloud.com?Subject=Sugest%E3o%20de%20lugar%20para%20o%20Brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...'); }}><IoIosAdd/><p>Possui uma sugestão? Envie um e-mail para nós!</p></PlaceSuggestion>
+                </Grow>
+              </Places>
+            </DistrictColumn>
+            <ScrollAd><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAd>
+          </>
+        )}
+      </Map>
+      { !isSelectDisplay ? (
+        <></>
+      ) : (
+        <ToClickDiv><ToClickDivText><p>Clique no mapa para começar</p></ToClickDivText></ToClickDiv>
+      )}
+    </HomepageLayout>
+  );
+}
