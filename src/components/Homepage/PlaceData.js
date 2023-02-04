@@ -34,11 +34,11 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
                 <Tooltip TransitionComponent={Zoom} title="Centro de informações ou guia para turistas" arrow  placement="left">
                   <div><FaHandsHelping color={placeSelected.hasGuidance ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Difícil acesso ou trilha" arrow  placement="left">
-                  <div><GiMountainClimbing color={placeSelected.isTrekking ? 'black' : 'lightgray'}/></div>
-                </Tooltip>
                 <Tooltip TransitionComponent={Zoom} title="Acesso rodoviário" arrow  placement="left">
                   <div><IoCar color={placeSelected.car ? 'black' : 'lightgray'}/></div>
+                </Tooltip>
+                <Tooltip TransitionComponent={Zoom} title="Difícil acesso ou trilha" arrow  placement="left">
+                  <div><GiMountainClimbing color={placeSelected.isTrekking ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
               </IconsColumn>
               <IconsColumn>
@@ -266,6 +266,7 @@ const LastUpdate = styled.div`
 `;
 
 const Name = styled.div`
+  width: 650px;
   font-size: 40px;
   line-height: 50px;
   margin-top: -9px;

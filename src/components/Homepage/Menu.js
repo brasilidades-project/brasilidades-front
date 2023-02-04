@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Slide } from '@material-ui/core';
-import { IoIosClose } from 'react-icons/io';
+import { IoIosHelpCircle, IoIosStar, IoIosSettings } from 'react-icons/io';
+import { IoLogOut, IoHome } from 'react-icons/io5';
+import UserContext from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Menu({ setIsMenuDisplay, sliderMenu, setSliderMenu }) {
+  const { setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
   return (
     <>
       <Slide in={sliderMenu} direction="left" timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>  
@@ -11,27 +16,37 @@ export default function Menu({ setIsMenuDisplay, sliderMenu, setSliderMenu }) {
       </Slide>
       <Slide in={sliderMenu} direction="left" timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
         <MenuDiv>
-          <CloseIcon onClick={() => {
-            setSliderMenu(false);
-            setTimeout(() => {
-              setIsMenuDisplay(false);
-            }, 600);
-          }}><IoIosClose/></CloseIcon>
+          <PageType onClick={() => { setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600);}}><p>Homepage</p><IoHome/></PageType>
+          <PageType><p>Configurações da conta</p><IoIosSettings/></PageType>
+          <PageType><p>Favoritos</p><IoIosStar/></PageType>
+          <PageType><p>Sobre nós</p><IoIosHelpCircle/></PageType>
+          <PageType onClick={() => { setUserData({}); navigate('/sign-in'); }}><p>Log out</p><IoLogOut/></PageType>
         </MenuDiv>
       </Slide>
     </>
   );
 }
 
-const CloseIcon = styled.div`
-  font-size: 30px;
-  position: fixed;
-  right: 80px;
-  top: 55px;
-  color: lightgray;
+const PageType = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  color: gray;
+  font-size: 18px;
+  p{
+    color: lightgray;
+    font-size: 15px;
+  }
   :hover{
     cursor: pointer;
-    color: #CF0E0E;
+    color: white;
+    border-bottom: 1px solid lightgray;
+    p{
+      color: white;
+    }
   }
 `;
 
@@ -43,6 +58,11 @@ const MenuDiv = styled.div`
   background-color: black;
   box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, .2);
   z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 80px 80px;
 `;
 
 const MenuBlur = styled.div`

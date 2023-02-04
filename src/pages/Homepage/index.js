@@ -11,6 +11,27 @@ import { Grow } from '@material-ui/core';
 export default function Homepage() {
   const [placesMg, setPlacesMg] = useState([
     {
+      name: 'Cristo Redentor',
+      image: 'https://prefeitura.rio/wp-content/uploads/2021/10/Cristo-DePaula-2.jpg',
+      image2: 'https://prefeitura.rio/wp-content/uploads/2021/10/Cristo-DePaula-2.jpg',
+      image3: 'https://prefeitura.rio/wp-content/uploads/2021/10/Cristo-DePaula-2.jpg',
+      image4: 'https://prefeitura.rio/wp-content/uploads/2021/10/Cristo-DePaula-2.jpg',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.',
+      city: 'Rio de Janeiro, Rio de Janeiro',
+      googleMapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.9542746056463!2d-43.21267588488418!3d-22.95191104525333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997fd5984aa13f%3A0x9dc984d7019502de!2sCristo%20Redentor!5e0!3m2!1spt-BR!2sbr!4v1675495024540!5m2!1spt-BR!2sbr',
+      isPaid: true,
+      hasFood: true,
+      hasCellular: true,
+      hasWc: true,
+      hasGuidance: true,
+      isTrekking: false,
+      needId: true,
+      car: true,
+      airplane: true,
+      boat: false,
+      updatedAt: '03/01/2023'
+    },
+    {
       name: 'Praça do Papa',
       image: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
       image2: 'http://portalbelohorizonte.com.br/sites/default/files/arquivos/ao-ar-livre-e-esportes/2021-11/praca-do-papa_qu4rto-studio-0030_0.jpg',
@@ -30,6 +51,27 @@ export default function Homepage() {
       airplane: true,
       boat: false,
       updatedAt: '02/01/2023'
+    },
+    {
+      name: 'Museu de Arte de São Paulo Assis Chateaubriand',
+      image: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image2: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image3: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image4: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.',
+      city: 'São Paulo, São Paulo',
+      googleMapUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14628.782787138132!2d-46.6558819!3d-23.561414!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe904f6a669744da1!2sMuseu%20de%20Arte%20de%20S%C3%A3o%20Paulo%20Assis%20Chateaubriand!5e0!3m2!1spt-BR!2sbr!4v1675495269985!5m2!1spt-BR!2sbr',
+      isPaid: true,
+      hasFood: true,
+      hasCellular: true,
+      hasWc: true,
+      hasGuidance: true,
+      isTrekking: false,
+      needId: true,
+      car: true,
+      airplane: true,
+      boat: false,
+      updatedAt: '04/01/2023'
     }
   ]);
   const [placeSelected, setPlaceSelected] = useState({});
