@@ -14,3 +14,8 @@ export async function unfavorite(favoriteId) {
   const response = await api.delete(`/places/${favoriteId}`);
   return response.data;
 }
+
+export async function unfavoriteAll(userId) {
+  const response = await api.delete(`/places/all/${userId}`);
+  return response.data;
+}

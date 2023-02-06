@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import useEmailUpdate from '../../hooks/api/useEmailUpdate';
 import UserContext from '../../contexts/UserContext';
 import usePasswordUpdate from '../../hooks/api/usePasswordUpdate';
+import useUnfavoriteAll from '../../hooks/api/useUnfavoriteAll';
+import useDeleteAccount from '../../hooks/api/useDeleteAccount';
 
 export default function Settings() {
   const [isMenuDisplay, setIsMenuDisplay] = useState(false);
@@ -24,13 +26,14 @@ export default function Settings() {
   const [newPassword, setNewPassword] = useState('');
   const { loadingEmailUpdate, emailUpdate } = useEmailUpdate();
   const { loadingPasswordUpdate, passwordUpdate } = usePasswordUpdate();
+  const { unfavoriteAllLoading, unfavoriteAll } = useUnfavoriteAll();
+  const { deleteAccountLoading, deleteAccount } = useDeleteAccount();
   const navigate = useNavigate();
   const { setUserData, userData } = useContext(UserContext);
 
   async function submitEmail() {
     try {
       const newUserData = await emailUpdate(email, userData.user.id);
-      toast('Seu e-mail foi alterado com sucesso!');
       setIsEmailDisplay(false);
       setUserData(newUserData);
       setEmail('');
@@ -42,11 +45,30 @@ export default function Settings() {
   async function submitPassword() {
     try {
       await passwordUpdate(newPassword, userData.user.id);
-      toast('Sua senha foi alterada com sucesso!');
       setIsPasswordDisplay(false);
       setNewPassword('');
     } catch (error) {
       toast('Não foi possível alterar sua senha!');
+    }
+  }
+
+  async function unfavoriteAllPlaces() {
+    try {
+      await unfavoriteAll(userData.user.id);
+      setIsDeleteFavListDisplay(false);
+    } catch (error) {
+      toast('Não foi possível desfavoritar tudo, tente novamente!');
+    }
+  }
+
+  async function deleteUserAccount() {
+    try {
+      await unfavoriteAll(userData.user.id);
+      await deleteAccount(userData.user.id);
+      setUserData({});
+      navigate('/sign-in');
+    } catch (error) {
+      toast('Não foi possível deletar sua conta, tente novamente!');
     }
   }
 
@@ -116,12 +138,12 @@ export default function Settings() {
           </Flexing>
           <Spacing></Spacing>
           { isDeleteFavListDisplay ? (
-            <ConfirmDeleteFlexing><ConfirmDeleteButton>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
+            <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={unfavoriteAllPlaces}>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
           ):(
             <DeleteButton onClick={() => setIsDeleteFavListDisplay(true)}>limpar toda minha lista de favoritos permanentemente</DeleteButton>
           ) }
           { isDeleteAccountDisplay ? (
-            <ConfirmDeleteFlexing><ConfirmDeleteButton>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
+            <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={deleteUserAccount}>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
           ):(
             <DeleteButton onClick={() => setIsDeleteAccountDisplay(true)}>apagar minha conta e todas as informações permanentemente</DeleteButton>
           ) }
