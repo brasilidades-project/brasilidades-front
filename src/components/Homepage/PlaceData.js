@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Fade, Tooltip, Zoom } from '@material-ui/core';
 import { IoIosClose, IoIosPin, IoIosTime, IoIosArrowForward, IoIosArrowBack, IoIosStar, IoIosHelpCircle } from 'react-icons/io';
@@ -13,7 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import GoogleMap from './GoogleMap';
 import notfound from '../../assets/images/notfound.png';
 
-export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected }) {
+export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected, isFavorite }) {
   return (
     <>
       <Fade in={sliderPlaceData} timeout={{ enter: 700, exit: 700 }} unmountOnExit mountOnEnter>  
@@ -76,7 +76,11 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
                   setIsPlaceDisplay(false);
                 }, 600);
               }}><IoIosClose/></CloseIcon>
-              <StarIcon><IoIosStar/></StarIcon>
+              { isFavorite ? (
+                <StarIcon isFavorite={isFavorite}><IoIosStar/></StarIcon>
+              ):(
+                <StarIcon><IoIosStar/></StarIcon>
+              ) }
             </FeatureIcons>
           </TopBar>
           <TopBarSpace></TopBarSpace>
@@ -149,9 +153,11 @@ const StarIcon = styled.div`
   font-size: 20px;
   margin-left: 5px;
   color: gray;
+  color: ${props => props.isFavorite ? 'gold':'gray'};
   :hover{
     cursor: pointer;
     color: gold;
+    color: ${props => props.isFavorite ? 'darkgoldenrod':'gray'};
     animation: wiggle 1s linear infinite;
   }
   @keyframes wiggle {

@@ -1,13 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grow } from '@material-ui/core';
 import { IoIosStar, IoMdSearch } from 'react-icons/io';
 import notfound from '../../assets/images/notfound.png';
+import useFavorite from '../../hooks/api/useFavorite';
+import { toast } from 'react-toastify';
+import useUnfavorite from '../../hooks/api/useUnfavorite';
 
 export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData, userId }) {
+  const { favoriteLoading, favorite } = useFavorite();
+  const { unfavoriteLoading, unfavorite } = useUnfavorite();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteId, setFavoriteId] = useState(0);
+
+  useEffect(() => {
+    if(place) {
+      (place.Favorite).map((favorite) => {
+        if(favorite.userId === userId) {
+          setIsFavorite(true);
+          setFavoriteId(favorite.id);
+        }
+      });
+    };
+  }, []);
+
+  async function favoritePlace() {
+    try {
+      const fav = await favorite(place.id, userId);
+      setIsFavorite(true);
+      setFavoriteId(fav.id);
+    } catch (error) {
+      toast('Não foi possível favoritar, tente novamente!');
+    }
+  }
+
+  async function unfavoritePlace() {
+    try {
+      await unfavorite(favoriteId);
+      setIsFavorite(false);
+    } catch (error) {
+      toast('Não foi possível desfavoritar, tente novamente!');
+    }
+  }
+
   return (
     <Grow in={toggleGrow} timeout={{ enter: timeout, exit: 300 }} mountOnEnter unmountOnExit>
-      <MarginDiv>
+      <MarginDiv isFavorite={isFavorite}>
         <img src={image} alt='Foto do ponto turístico' 
           onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}
           onError={({ currentTarget }) => {
@@ -16,11 +54,15 @@ export default function Place({ toggleGrow, name, timeout, image, description, p
           }}
         />
         <PlaceData>
-          <Title onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}>{name}</Title>
+          <Title onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }} isFavorite={isFavorite}>{name}</Title>
           <Description>{description}</Description>
           <Icons>
             <IconL onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}><div><IoMdSearch/></div><p>saber mais</p></IconL>
-            <IconR><div><IoIosStar/></div><p>favoritar</p></IconR>
+            { isFavorite ? (
+              <IconR onClick={unfavoritePlace} disabled={unfavoriteLoading}><div><IoIosStar/></div><p>desfavoritar</p></IconR>
+            ):(
+              <IconR onClick={favoritePlace} disabled={favoriteLoading}><div><IoIosStar/></div><p>favoritar</p></IconR>
+            ) }
           </Icons>
         </PlaceData>
       </MarginDiv>
@@ -32,6 +74,7 @@ const Title = styled.div`
   width: fit-content;
   font-size: 20px;
   border-bottom: 1px solid gray;
+  border-bottom: ${props => props.isFavorite ? '1px solid #EEBC1D':'1 px solid gray'};
   box-sizing: border-box;
   padding-bottom: 3px;
   margin-bottom: 5px;
@@ -41,6 +84,7 @@ const Title = styled.div`
   :hover{
     cursor: pointer;
     border-bottom: 1px solid white;
+    border-bottom: ${props => props.isFavorite ? '1px solid #EEBC1D':'1 px solid gray'};
   }
 `;
 
@@ -171,6 +215,7 @@ const PlaceData = styled.div`
 
 const MarginDiv = styled.div`
   border: 1px solid gray;
+  border: ${props => props.isFavorite ? '1px solid #EEBC1D':'1 px solid gray'};
   height: 102px;
   border-radius: 5px;
   margin-top: 10px;
