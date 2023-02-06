@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Fade, Tooltip, Zoom } from '@material-ui/core';
-import { IoIosClose, IoIosPin, IoIosTime, IoIosArrowForward, IoIosArrowBack, IoIosStar } from 'react-icons/io';
+import { IoIosClose, IoIosPin, IoIosTime, IoIosArrowForward, IoIosArrowBack, IoIosStar, IoIosHelpCircle } from 'react-icons/io';
 import { IoFastFood, IoCellular, IoAirplane, IoCar, IoBoat } from 'react-icons/io5';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { BsBadgeWcFill } from 'react-icons/bs';
 import { GiMountainClimbing } from 'react-icons/gi';
-import { FaHandsHelping } from 'react-icons/fa';
 import { RiFileUserFill } from 'react-icons/ri';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
 import GoogleMap from './GoogleMap';
+import notfound from '../../assets/images/notfound.png';
 
 export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected }) {
   return (
@@ -22,39 +22,44 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
       <Zoom in={sliderPlaceData} timeout={{ enter: 500, exit: 500 }} style={{ transitionDelay: sliderPlaceData ? '200ms' : '0ms' }} unmountOnExit mountOnEnter>
         <PlaceDiv>
           <TopBar>
-            <img src={placeSelected.image} alt='Foto do ponto turístico'/>
+            <img src={placeSelected.image} alt='Foto do ponto turístico'
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = notfound;
+              }}
+            />
             <AboutIcons>
               <IconsColumn>
-                <Tooltip TransitionComponent={Zoom} title="Entrada paga" arrow  placement="left">
+                <Tooltip TransitionComponent={Zoom} title="entrada paga" arrow  placement="left">
                   <div><AiFillDollarCircle color={placeSelected.isPaid ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Sinal de celular" arrow  placement="left">
+                <Tooltip TransitionComponent={Zoom} title="sinal de celular" arrow  placement="left">
                   <div><IoCellular color={placeSelected.hasCellular ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Centro de informações ou guia para turistas" arrow  placement="left">
-                  <div><FaHandsHelping color={placeSelected.hasGuidance ? 'black' : 'lightgray'}/></div>
+                <Tooltip TransitionComponent={Zoom} title="ajuda para turistas" arrow  placement="left">
+                  <div><IoIosHelpCircle color={placeSelected.hasGuidance ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Acesso rodoviário" arrow  placement="left">
+                <Tooltip TransitionComponent={Zoom} title="acesso rodoviário" arrow  placement="left">
                   <div><IoCar color={placeSelected.car ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Difícil acesso ou trilha" arrow  placement="left">
+                <Tooltip TransitionComponent={Zoom} title="difícil acesso ou trilha" arrow  placement="left">
                   <div><GiMountainClimbing color={placeSelected.isTrekking ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
               </IconsColumn>
               <IconsColumn>
-                <Tooltip TransitionComponent={Zoom} title="Locais de alimentação" arrow  placement="right">
+                <Tooltip TransitionComponent={Zoom} title="locais de alimentação" arrow  placement="right">
                   <div><IoFastFood color={placeSelected.hasFood ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Banheiro" arrow  placement="right">
+                <Tooltip TransitionComponent={Zoom} title="banheiro" arrow  placement="right">
                   <div><BsBadgeWcFill color={placeSelected.hasWc ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Documento obrigatório" arrow  placement="right">
+                <Tooltip TransitionComponent={Zoom} title="documento obrigatório" arrow  placement="right">
                   <div><RiFileUserFill color={placeSelected.needId ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Acesso aéreo" arrow  placement="right">
+                <Tooltip TransitionComponent={Zoom} title="acesso aéreo" arrow  placement="right">
                   <div><IoAirplane color={placeSelected.airplane ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
-                <Tooltip TransitionComponent={Zoom} title="Acesso marítimo" arrow  placement="right">
+                <Tooltip TransitionComponent={Zoom} title="acesso marítimo" arrow  placement="right">
                   <div><IoBoat color={placeSelected.boat ? 'black' : 'lightgray'}/></div>
                 </Tooltip>
               </IconsColumn>
@@ -62,7 +67,7 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
             <TopInfo>
               <Name>{placeSelected.name}</Name>
               <Localization><IoIosPin/><p>{placeSelected.city}</p></Localization>
-              <LastUpdate><IoIosTime/><p> Atualizado em: {placeSelected.updatedAt}</p></LastUpdate>
+              <LastUpdate><IoIosTime/><p> atualizado em: {placeSelected.updatedAt}</p></LastUpdate>
             </TopInfo>
             <FeatureIcons>
               <CloseIcon onClick={() => {
@@ -76,11 +81,11 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
           </TopBar>
           <TopBarSpace></TopBarSpace>
           <Description>
-            <Subtitles>Sobre</Subtitles>
-            {placeSelected.description}
+            <Subtitles>sobre</Subtitles>
+            <p>{placeSelected.description}</p>
           </Description>
           <Images>
-            <Subtitles>Fotos</Subtitles>
+            <Subtitles>fotos</Subtitles>
             <PreviousIcon><IoIosArrowBack/></PreviousIcon>
             <NextIcon><IoIosArrowForward/></NextIcon>
             <Slider settings = {{
@@ -92,23 +97,38 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
             }}>
               <div>
                 <ImagesFlex>
-                  <img src={placeSelected.image2} alt='Foto do ponto turístico'/>
+                  <img src={placeSelected.image2} alt='Foto do ponto turístico' 
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = notfound;
+                    }}
+                  />
                 </ImagesFlex>
               </div>
               <div>
                 <ImagesFlex>
-                  <img src={placeSelected.image3} alt='Foto do ponto turístico'/>
+                  <img src={placeSelected.image3} alt='Foto do ponto turístico'
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = notfound;
+                    }}
+                  />
                 </ImagesFlex>
               </div>
               <div>
                 <ImagesFlex>
-                  <img src={placeSelected.image4} alt='Foto do ponto turístico'/>
+                  <img src={placeSelected.image4} alt='Foto do ponto turístico'
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = notfound;
+                    }}
+                  />
                 </ImagesFlex>
               </div>
             </Slider>
           </Images>
           <MapDiv>
-            <Subtitles>Localização</Subtitles>
+            <Subtitles>localização</Subtitles>
             <GoogleMapDiv>
               <GoogleMap src={placeSelected.googleMapUrl}/>
             </GoogleMapDiv>
@@ -195,7 +215,7 @@ const Subtitles = styled.div`
   border-bottom: 2px solid darkgray;
   box-sizing: border-box;
   padding-bottom: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const ImagesFlex = styled.div`
@@ -222,6 +242,9 @@ const Description = styled.div`
   margin-top: 15px;
   font-size: 17px;
   color: black;
+  p{
+    text-indent: 40px;
+  }
 `;
 
 const IconsColumn = styled.div`

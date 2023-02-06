@@ -1,14 +1,14 @@
-import { Logo, Map, Slogan, Slogan1, Slogan2, Slogan3, Places, PlaceSuggestion, DistrictName, Line, ToClickDiv, ToClickDivText, TopBar, DistrictColumn, MenuIcon, ScrollAd } from '../../components/Homepage';
+import { Logo, Slogan, Slogan1, Slogan2, Slogan3, TopBar, MenuIcon, Places } from '../../components/Homepage';
 import HomepageLayout from '../../layouts/Homepage';
-import { MapBrazil } from 'react-brazil-map';
-import { useEffect, useState } from 'react';
-import Place from '../../components/Homepage/Place';
-import { districtsImages, districtsNames } from '../../components/Homepage/districtsData';
-import { IoMdMenu, IoIosAdd } from 'react-icons/io';
+import { useState } from 'react';
+import { IoMdMenu } from 'react-icons/io';
 import Menu from '../../components/Homepage/Menu';
-import PlaceData from '../../components/Homepage/PlaceData';
 import { Grow } from '@material-ui/core';
-export default function Homepage() {
+import { FavoritesContent, FavoritesPlaces, FavoritesTitle, ScrollAdFav } from '../../components/Favorites';
+import PlaceData from '../../components/Homepage/PlaceData';
+import Place from '../../components/Homepage/Place';
+import { useNavigate } from 'react-router-dom';
+export default function Favorites() {
   const [placesMg, setPlacesMg] = useState([
     {
       name: 'Cristo Redentor',
@@ -93,34 +93,36 @@ export default function Homepage() {
       airplane: true,
       boat: false,
       updatedAt: '04/01/2023'
+    },
+    {
+      name: 'Museu de Arte de São Paulo Assis Chateaubriand',
+      image: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image2: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image3: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      image4: 'https://lh3.googleusercontent.com/p/AF1QipMGIvyxHIHM6WzEEpOvqyVXatJC6W7QklJ5smMm=s1360-w1360-h1020',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent est nisi, egestas id imperdiet in, rhoncus ac sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.',
+      city: 'São Paulo, São Paulo',
+      googleMapUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14628.782787138132!2d-46.6558819!3d-23.561414!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe904f6a669744da1!2sMuseu%20de%20Arte%20de%20S%C3%A3o%20Paulo%20Assis%20Chateaubriand!5e0!3m2!1spt-BR!2sbr!4v1675495269985!5m2!1spt-BR!2sbr',
+      isPaid: true,
+      hasFood: true,
+      hasCellular: true,
+      hasWc: true,
+      hasGuidance: true,
+      isTrekking: false,
+      needId: true,
+      car: true,
+      airplane: true,
+      boat: false,
+      updatedAt: '04/01/2023'
     }
   ]);
   const [placeSelected, setPlaceSelected] = useState({});
-  const [district, setDistrict] = useState('');
-  const [isSelectDisplay, setIsSelectDisplay] = useState(true);
   const [isMenuDisplay, setIsMenuDisplay] = useState(false);
   const [isPlaceDisplay, setIsPlaceDisplay] = useState(false);
   const [sliderMenu, setSliderMenu] = useState(false);
   const [sliderPlaceData, setSliderPlaceData] = useState(false);
-  const [toggleGrow, setToggleGrow] = useState(false);
-  const [districtName, setDistrictName] = useState('');
-  const [districtImage, setDistrictImage] = useState(districtsImages.BR);
-  const [appEmail, setAppEmail] = useState('leonardosouzaf@icloud.com');
-  useEffect(() => {
-    if(district !== '') {
-      setIsSelectDisplay(false);
-    }
-    for(let i=0; i<28; i++) {
-      if(Object.keys(districtsImages)[i] === district) {
-        setToggleGrow(false);
-        setDistrictImage(districtsImages[district]);
-        setDistrictName(districtsNames[district]);
-        setTimeout(() => {
-          setToggleGrow(true);
-        }, 500);
-      }
-    }
-  }, [district]);
+  const [toggleGrow, setToggleGrow] = useState(true);
+  const navigate = useNavigate();
   return (
     <HomepageLayout>
       { isMenuDisplay ? (
@@ -134,41 +136,21 @@ export default function Homepage() {
         <></>
       )}
       <TopBar>
-        <Logo><p>brasilidades</p></Logo>
+        <Logo onClick={() => navigate('/homepage')}><p>brasilidades</p></Logo>
         <Slogan><Slogan1>pesquise,</Slogan1><Slogan2>favorite</Slogan2><Slogan3>e visite</Slogan3></Slogan>
-        { isSelectDisplay ? (
-          <></>
-        ):(
-          <MenuIcon onClick={() => {setIsMenuDisplay(true); setSliderMenu(true);}}><IoMdMenu/></MenuIcon>
-        )}
+        <MenuIcon onClick={() => {setIsMenuDisplay(true); setSliderMenu(true);}}><IoMdMenu/></MenuIcon>
       </TopBar>
       <Grow in={true} timeout={{ enter: 700, exit: 700 }} unmountOnExit mountOnEnter>  
-        <Map>
-          <MapBrazil onChange={setDistrict} bg='white' fill='black' colorStroke='lightgray' colorLabel='white' width={500} height={500} />
-          { isSelectDisplay ? (
-            <></>
-          ) : (
-            <>
-              <DistrictColumn>
-                <DistrictName><img src={districtImage} alt='Bandeira do Estado'/>{districtName}</DistrictName>
-                <Line></Line>
-                <Places>
-                  {placesMg.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData}/>)}
-                  <Grow in={toggleGrow} timeout={{ enter: 200, exit: 300 }} mountOnEnter unmountOnExit>
-                    <PlaceSuggestion onClick={() => { window.open(`mailto:${appEmail}?Subject=Sugest%E3o%20de%20lugar%20para%20o%20Brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...`); }}><IoIosAdd/><p>possui uma sugestão? envie um e-mail para nós!</p></PlaceSuggestion>
-                  </Grow>
-                </Places>
-              </DistrictColumn>
-              <ScrollAd><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAd>
-            </>
-          )}
-        </Map>
+        <FavoritesContent>
+          <FavoritesTitle>favoritos</FavoritesTitle>
+          <FavoritesPlaces>
+            <Places>
+              {placesMg.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData}/>)}
+            </Places>
+            <ScrollAdFav><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAdFav>
+          </FavoritesPlaces>
+        </FavoritesContent>
       </Grow>
-      { !isSelectDisplay ? (
-        <></>
-      ) : (
-        <ToClickDiv><ToClickDivText><p>clique no mapa para começar</p></ToClickDivText></ToClickDiv>
-      )}
     </HomepageLayout>
   );
 }

@@ -19,6 +19,15 @@ const Page = styled.div`
   flex-direction: column;
   align-items: center;
 
+  *{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (max-width: 600px) {
     padding: 0;
   }

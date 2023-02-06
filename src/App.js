@@ -13,6 +13,9 @@ import Homepage from './pages/Homepage';
 import { UserProvider } from './contexts/UserContext';
 
 import useToken from './hooks/useToken';
+import About from './pages/About';
+import Settings from './pages/Settings';
+import Favorites from './pages/Favorites';
 
 export default function App() {
   return (
@@ -28,6 +31,27 @@ export default function App() {
               element={
                 <ProtectedRouteGuard>
                   <Homepage />
+                </ProtectedRouteGuard>
+              }
+            />
+            <Route path="/about-us"
+              element={
+                <ProtectedRouteGuard>
+                  <About />
+                </ProtectedRouteGuard>
+              }
+            />
+            <Route path="/settings"
+              element={
+                <ProtectedRouteGuard>
+                  <Settings />
+                </ProtectedRouteGuard>
+              }
+            />
+            <Route path="/favorites"
+              element={
+                <ProtectedRouteGuard>
+                  <Favorites />
                 </ProtectedRouteGuard>
               }
             />

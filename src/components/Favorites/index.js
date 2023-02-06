@@ -1,0 +1,47 @@
+import styled from 'styled-components';
+
+export const FavoritesContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
+  padding: 40px 60px;
+`;
+
+export const FavoritesTitle = styled.div`
+  width: fit-content;
+  font-size: 35px;
+  border-bottom: 2px solid darkgray;
+  box-sizing: border-box;
+  padding-bottom: 4px;
+  margin-bottom: 25px;
+  margin-top: 50px;
+  :hover{
+    cursor: default;
+  }
+`;
+
+export const FavoritesPlaces = styled.div`
+  display: flex;
+`;
+
+export const ScrollAdFav = styled.div`
+  writing-mode: vertical-rl;
+  width: 30px;
+  box-sizing: border-box;
+  color: black;
+  margin-top: 10px;
+  p {
+    animation: color-change 1s 5;
+    animation-delay: 1s;
+  }
+  @keyframes color-change {
+    0% { color: gray; }
+    50% { color: white; }
+    100% { color: gray; }
+  }
+  :hover{
+    cursor: default;
+  }
+`;

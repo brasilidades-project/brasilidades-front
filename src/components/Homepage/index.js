@@ -126,14 +126,17 @@ export const Line = styled.div`
 
 export const Places = styled.div`
   width: 100%;
+  height: 450px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  scroll-behavior: smooth;
+  scroll-margin: 0px;
+  position: relative;
 `;
 
 export const Map = styled.div`
   display: flex;
+  width: 100vw;
   justify-content: center;
   box-sizing: border-box;
   padding: 80px 60px;
@@ -186,6 +189,6 @@ export const Logo = styled.div`
     margin: 0px 13px;
   }
   :hover{
-    cursor: default;
+    cursor: pointer;
   }
 `;

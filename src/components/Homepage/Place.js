@@ -2,12 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grow } from '@material-ui/core';
 import { IoIosStar, IoMdSearch } from 'react-icons/io';
+import notfound from '../../assets/images/notfound.png';
 
 export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData }) {
   return (
     <Grow in={toggleGrow} timeout={{ enter: timeout, exit: 300 }} mountOnEnter unmountOnExit>
       <MarginDiv>
-        <img src={image} alt='Foto do ponto turístico' onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}/>
+        <img src={image} alt='Foto do ponto turístico' 
+          onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = notfound;
+          }}
+        />
         <PlaceData>
           <Title onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}>{name}</Title>
           <Description>{description}</Description>

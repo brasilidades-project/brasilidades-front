@@ -16,11 +16,11 @@ export default function Menu({ setIsMenuDisplay, sliderMenu, setSliderMenu }) {
       </Slide>
       <Slide in={sliderMenu} direction="left" timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
         <MenuDiv>
-          <PageType onClick={() => { setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600);}}><p>Homepage</p><IoHome/></PageType>
-          <PageType><p>Configurações da conta</p><IoIosSettings/></PageType>
-          <PageType><p>Favoritos</p><IoIosStar/></PageType>
-          <PageType><p>Sobre nós</p><IoIosHelpCircle/></PageType>
-          <PageType onClick={() => { setUserData({}); navigate('/sign-in'); }}><p>Log out</p><IoLogOut/></PageType>
+          <PageType onClick={() => { navigate('/homepage'); setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600); }}><p>homepage</p><IoHome/></PageType>
+          <PageType onClick={() => { navigate('/settings'); setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600); }}><p>configurações</p><IoIosSettings/></PageType>
+          <PageType onClick={() => { navigate('/favorites'); setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600); }}><p>favoritos</p><IoIosStar/></PageType>
+          <PageType onClick={() => { navigate('/about-us'); setSliderMenu(false); setTimeout(() => { setIsMenuDisplay(false); }, 600); }}><p>sobre nós</p><IoIosHelpCircle/></PageType>
+          <PageType onClick={() => { setUserData({}); navigate('/sign-in'); }}><p>log out</p><IoLogOut/></PageType>
         </MenuDiv>
       </Slide>
     </>
