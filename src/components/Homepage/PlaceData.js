@@ -13,7 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import GoogleMap from './GoogleMap';
 import notfound from '../../assets/images/notfound.png';
 
-export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected, isFavorite }) {
+export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected, placeSelectedFav }) {
   return (
     <>
       <Fade in={sliderPlaceData} timeout={{ enter: 700, exit: 700 }} unmountOnExit mountOnEnter>  
@@ -76,10 +76,14 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
                   setIsPlaceDisplay(false);
                 }, 600);
               }}><IoIosClose/></CloseIcon>
-              { isFavorite ? (
-                <StarIcon isFavorite={isFavorite}><IoIosStar/></StarIcon>
+              { placeSelectedFav ? (
+                <Tooltip TransitionComponent={Zoom} title="favoritado" arrow  placement="left">
+                  <StarIcon placeSelectedFav={placeSelectedFav}><IoIosStar/></StarIcon>
+                </Tooltip>
               ):(
-                <StarIcon><IoIosStar/></StarIcon>
+                <Tooltip TransitionComponent={Zoom} title="não favoritado" arrow  placement="left">
+                  <StarIcon placeSelectedFav={placeSelectedFav}><IoIosStar/></StarIcon>
+                </Tooltip>
               ) }
             </FeatureIcons>
           </TopBar>
@@ -153,36 +157,7 @@ const StarIcon = styled.div`
   font-size: 20px;
   margin-left: 5px;
   color: gray;
-  color: ${props => props.isFavorite ? 'gold':'gray'};
-  :hover{
-    cursor: pointer;
-    color: gold;
-    color: ${props => props.isFavorite ? 'darkgoldenrod':'gray'};
-    animation: wiggle 1s linear infinite;
-  }
-  @keyframes wiggle {
-    0%, 7% {
-      transform: rotateZ(0);
-    }
-    15% {
-      transform: rotateZ(-10deg);
-    }
-    20% {
-      transform: rotateZ(5deg);
-    }
-    25% {
-      transform: rotateZ(-5deg);
-    }
-    30% {
-      transform: rotateZ(3deg);
-    }
-    35% {
-      transform: rotateZ(-2deg);
-    }
-    40%, 100% {
-      transform: rotateZ(0);
-    }
-  }
+  color: ${props => props.placeSelectedFav ? 'gold':'gray'};
 `;
 
 const GoogleMapDiv = styled.div`
@@ -363,7 +338,7 @@ const TopBar = styled.div`
 
 const PlaceDiv = styled.div`
   width: 900px;
-  height: 630px;
+  height: 77vh;
   background-color: white;
   position: fixed;
   top: 100px;

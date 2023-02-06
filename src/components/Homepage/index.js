@@ -38,7 +38,7 @@ export const PlaceSuggestion = styled.div`
 
 export const MenuIcon = styled.div`
   position: absolute;
-  right: 65px;
+  right: 50px;
   top: 60px;
   font-size: 20px;
   color: lightgray;
@@ -51,6 +51,8 @@ export const MenuIcon = styled.div`
 export const ScrollAd = styled.div`
   writing-mode: vertical-rl;
   width: 30px;
+  position: absolute;
+  right: 40px;
   box-sizing: border-box;
   margin-top: 40px;
   color: black;
@@ -142,6 +144,7 @@ export const Map = styled.div`
   padding: 80px 60px;
   padding-left: 80px;
   padding-bottom: 50px;
+  position: relative;
 `;
 
 export const Slogan = styled.div`

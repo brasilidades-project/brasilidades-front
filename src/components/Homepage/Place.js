@@ -7,7 +7,7 @@ import useFavorite from '../../hooks/api/useFavorite';
 import { toast } from 'react-toastify';
 import useUnfavorite from '../../hooks/api/useUnfavorite';
 
-export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData, userId }) {
+export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData, userId, setPlaceSelectedFav }) {
   const { favoriteLoading, favorite } = useFavorite();
   const { unfavoriteLoading, unfavorite } = useUnfavorite();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -47,17 +47,17 @@ export default function Place({ toggleGrow, name, timeout, image, description, p
     <Grow in={toggleGrow} timeout={{ enter: timeout, exit: 300 }} mountOnEnter unmountOnExit>
       <MarginDiv isFavorite={isFavorite}>
         <img src={image} alt='Foto do ponto turístico' 
-          onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}
+          onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); if(isFavorite) {setPlaceSelectedFav(true);}else {setPlaceSelectedFav(false);} }}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = notfound;
           }}
         />
         <PlaceData>
-          <Title onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }} isFavorite={isFavorite}>{name}</Title>
+          <Title onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); if(isFavorite) {setPlaceSelectedFav(true);}else {setPlaceSelectedFav(false);} }} isFavorite={isFavorite}>{name}</Title>
           <Description>{description}</Description>
           <Icons>
-            <IconL onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); }}><div><IoMdSearch/></div><p>saber mais</p></IconL>
+            <IconL onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); if(isFavorite) {setPlaceSelectedFav(true);}else {setPlaceSelectedFav(false);} }}><div><IoMdSearch/></div><p>saber mais</p></IconL>
             { isFavorite ? (
               <IconR onClick={unfavoritePlace} disabled={unfavoriteLoading}><div><IoIosStar/></div><p>desfavoritar</p></IconR>
             ):(

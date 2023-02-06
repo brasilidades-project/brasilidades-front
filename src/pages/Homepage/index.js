@@ -14,6 +14,7 @@ import useDistrictPlaces from '../../hooks/api/useDistrictPlaces';
 
 export default function Homepage() {
   const [placeSelected, setPlaceSelected] = useState({});
+  const [placeSelectedFav, setPlaceSelectedFav] = useState(false);
   const [district, setDistrict] = useState('');
   const [isSelectDisplay, setIsSelectDisplay] = useState(true);
   const [isMenuDisplay, setIsMenuDisplay] = useState(false);
@@ -27,7 +28,6 @@ export default function Homepage() {
   const { userData } = useContext(UserContext);
   const { districtPlacesLoading, districtPlaces } = useDistrictPlaces();
   const [placesArr, setPlacesArr] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     if(district !== '') {
@@ -63,7 +63,7 @@ export default function Homepage() {
         <></>
       )}
       { isPlaceDisplay ? (
-        <PlaceData setIsPlaceDisplay={setIsPlaceDisplay} placeSelected={placeSelected} sliderPlaceData={sliderPlaceData} setSliderPlaceData={setSliderPlaceData} isFavorite={isFavorite}/>
+        <PlaceData setIsPlaceDisplay={setIsPlaceDisplay} placeSelected={placeSelected} sliderPlaceData={sliderPlaceData} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id} placeSelectedFav={placeSelectedFav}/>
       ):(
         <></>
       )}
@@ -87,7 +87,7 @@ export default function Homepage() {
                 <DistrictName><img src={districtImage} alt='Bandeira do Estado'/>{districtName}</DistrictName>
                 <Line></Line>
                 <Places>
-                  {placesArr.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id}/>)}
+                  {placesArr.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id} setPlaceSelectedFav={setPlaceSelectedFav}/>)}
                   <Grow in={toggleGrow} timeout={{ enter: 200, exit: 300 }} mountOnEnter unmountOnExit>
                     <PlaceSuggestion onClick={() => { window.open(`mailto:${appEmail}?Subject=Sugest%E3o%20de%20lugar%20para%20o%20brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...`); }}><IoIosAdd/><p>possui uma sugestão? envie um e-mail para nós!</p></PlaceSuggestion>
                   </Grow>
