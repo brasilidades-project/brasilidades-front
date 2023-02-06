@@ -24,6 +24,7 @@ export const FavoritesTitle = styled.div`
 
 export const FavoritesPlaces = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const ScrollAdFav = styled.div`
@@ -32,6 +33,8 @@ export const ScrollAdFav = styled.div`
   box-sizing: border-box;
   color: black;
   margin-top: 10px;
+  position: absolute;
+  right: -30px;
   p {
     animation: color-change 1s 5;
     animation-delay: 1s;

@@ -174,7 +174,7 @@ export const Slogan1 = styled.div`
 `;
 
 export const Logo = styled.div`
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   font-size: 60px;
