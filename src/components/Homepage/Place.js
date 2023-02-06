@@ -4,7 +4,7 @@ import { Grow } from '@material-ui/core';
 import { IoIosStar, IoMdSearch } from 'react-icons/io';
 import notfound from '../../assets/images/notfound.png';
 
-export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData }) {
+export default function Place({ toggleGrow, name, timeout, image, description, place, setPlaceSelected, setIsPlaceDisplay, setSliderPlaceData, userId }) {
   return (
     <Grow in={toggleGrow} timeout={{ enter: timeout, exit: 300 }} mountOnEnter unmountOnExit>
       <MarginDiv>

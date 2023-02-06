@@ -1,13 +1,14 @@
 import { Logo, Map, Slogan, Slogan1, Slogan2, Slogan3, Places, PlaceSuggestion, DistrictName, Line, ToClickDiv, ToClickDivText, TopBar, DistrictColumn, MenuIcon, ScrollAd } from '../../components/Homepage';
 import HomepageLayout from '../../layouts/Homepage';
 import { MapBrazil } from 'react-brazil-map';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Place from '../../components/Homepage/Place';
 import { districtsImages, districtsNames } from '../../components/Homepage/districtsData';
 import { IoMdMenu, IoIosAdd } from 'react-icons/io';
 import Menu from '../../components/Homepage/Menu';
 import PlaceData from '../../components/Homepage/PlaceData';
 import { Grow } from '@material-ui/core';
+import UserContext from '../../contexts/UserContext';
 export default function Homepage() {
   const [placesMg, setPlacesMg] = useState([
     {
@@ -106,6 +107,8 @@ export default function Homepage() {
   const [districtName, setDistrictName] = useState('');
   const [districtImage, setDistrictImage] = useState(districtsImages.BR);
   const [appEmail, setAppEmail] = useState('leonardosouzaf@icloud.com');
+  const { setUserData, userData } = useContext(UserContext);
+
   useEffect(() => {
     if(district !== '') {
       setIsSelectDisplay(false);
@@ -153,9 +156,9 @@ export default function Homepage() {
                 <DistrictName><img src={districtImage} alt='Bandeira do Estado'/>{districtName}</DistrictName>
                 <Line></Line>
                 <Places>
-                  {placesMg.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData}/>)}
+                  {placesMg.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id}/>)}
                   <Grow in={toggleGrow} timeout={{ enter: 200, exit: 300 }} mountOnEnter unmountOnExit>
-                    <PlaceSuggestion onClick={() => { window.open(`mailto:${appEmail}?Subject=Sugest%E3o%20de%20lugar%20para%20o%20Brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...`); }}><IoIosAdd/><p>possui uma sugestão? envie um e-mail para nós!</p></PlaceSuggestion>
+                    <PlaceSuggestion onClick={() => { window.open(`mailto:${appEmail}?Subject=Sugest%E3o%20de%20lugar%20para%20o%20brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...`); }}><IoIosAdd/><p>possui uma sugestão? envie um e-mail para nós!</p></PlaceSuggestion>
                   </Grow>
                 </Places>
               </DistrictColumn>

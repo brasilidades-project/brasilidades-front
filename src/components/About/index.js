@@ -38,4 +38,7 @@ export const AboutEmail = styled.div`
   line-height: 16px;
   text-indent: 40px;
   margin-top: 10px;
+  :hover{
+    cursor: pointer;
+  }
 `;
