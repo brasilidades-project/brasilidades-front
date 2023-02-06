@@ -23,7 +23,7 @@ export default styled.div`
   @media (max-width: 600px) {
     padding: 0;
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;

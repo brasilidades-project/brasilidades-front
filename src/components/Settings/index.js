@@ -97,7 +97,9 @@ export const SettingsInput = styled.div`
 export const SettingsContent = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
+  height: 85vh;
   max-width: 1400px;
   box-sizing: border-box;
   padding: 40px 60px;

@@ -86,67 +86,70 @@ export default function Settings() {
       </TopBar>
       <Grow in={true} timeout={{ enter: 700, exit: 700 }} unmountOnExit mountOnEnter>  
         <SettingsContent>
-          <SettingsTitle>configurações da conta</SettingsTitle>
-          <Flexing>
-            <SettingsSubtitle>trocar e-mail</SettingsSubtitle>
-            { isEmailDisplay ? (
-              <>
-                <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <CancelButton onClick={() => setIsEmailDisplay(false)} disabled={loadingEmailUpdate}>cancelar</CancelButton>
+          <div>
+            <SettingsTitle>configurações da conta</SettingsTitle>
+            <Flexing>
+              <SettingsSubtitle>trocar e-mail</SettingsSubtitle>
+              { isEmailDisplay ? (
+                <>
+                  <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <CancelButton onClick={() => setIsEmailDisplay(false)} disabled={loadingEmailUpdate}>cancelar</CancelButton>
+                  </Fade>
+                  <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <SettingsInput>
+                      <WhiteBorderTextField id="outlined-basic" variant="outlined" label="e-mail novo" type="text" fullWidth value={email} onChange={e => setEmail(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused disabled={loadingEmailUpdate}/>
+                    </SettingsInput>
+                  </Fade>
+                  <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <ConfirmButton onClick={submitEmail} disabled={loadingEmailUpdate}>confirmar</ConfirmButton>
+                  </Fade>
+                </>
+              ):(
+                <Fade in={!isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                  <ChangeButton onClick={() => setIsEmailDisplay(true)}>trocar</ChangeButton>
                 </Fade>
-                <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <SettingsInput>
-                    <WhiteBorderTextField id="outlined-basic" variant="outlined" label="e-mail novo" type="text" fullWidth value={email} onChange={e => setEmail(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused disabled={loadingEmailUpdate}/>
-                  </SettingsInput>
+              ) }
+            </Flexing>
+            <Flexing>
+              <SettingsPasswordSubtitle>trocar senha</SettingsPasswordSubtitle>
+              { isPasswordDisplay ? (
+                <>
+                  <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <CancelButton onClick={() => setIsPasswordDisplay(false)}>cancelar</CancelButton>
+                  </Fade>
+                  {/* <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <SettingsInput>
+                      <WhiteBorderTextField id="outlined-basic" variant="outlined" label="senha antiga" type="password" fullWidth value={password} onChange={e => setPassword(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused/>
+                    </SettingsInput>
+                  </Fade> */}
+                  <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <SettingsInput>
+                      <WhiteBorderTextField id="outlined-basic" variant="outlined" label="senha nova" type="password" fullWidth value={newPassword} onChange={e => setNewPassword(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused/>
+                    </SettingsInput>
+                  </Fade>
+                  <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                    <ConfirmButton onClick={submitPassword}>confirmar</ConfirmButton>
+                  </Fade>
+                </>
+              ):(
+                <Fade in={!isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
+                  <ChangeButton onClick={() => setIsPasswordDisplay(true)}>trocar</ChangeButton>
                 </Fade>
-                <Fade in={isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <ConfirmButton onClick={submitEmail} disabled={loadingEmailUpdate}>confirmar</ConfirmButton>
-                </Fade>
-              </>
+              ) }
+            </Flexing>
+          </div>
+          <div>
+            { isDeleteFavListDisplay ? (
+              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={unfavoriteAllPlaces}>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
             ):(
-              <Fade in={!isEmailDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                <ChangeButton onClick={() => setIsEmailDisplay(true)}>trocar</ChangeButton>
-              </Fade>
+              <DeleteButton onClick={() => setIsDeleteFavListDisplay(true)}>limpar toda minha lista de favoritos permanentemente</DeleteButton>
             ) }
-          </Flexing>
-          <Flexing>
-            <SettingsPasswordSubtitle>trocar senha</SettingsPasswordSubtitle>
-            { isPasswordDisplay ? (
-              <>
-                <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <CancelButton onClick={() => setIsPasswordDisplay(false)}>cancelar</CancelButton>
-                </Fade>
-                {/* <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <SettingsInput>
-                    <WhiteBorderTextField id="outlined-basic" variant="outlined" label="senha antiga" type="password" fullWidth value={password} onChange={e => setPassword(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused/>
-                  </SettingsInput>
-                </Fade> */}
-                <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <SettingsInput>
-                    <WhiteBorderTextField id="outlined-basic" variant="outlined" label="senha nova" type="password" fullWidth value={newPassword} onChange={e => setNewPassword(e.target.value)} size="small" InputProps={{ style: { height: '35px', color: 'white', fontFamily: 'Lexend Deca' } }} InputLabelProps={{ style: { color: 'white', fontFamily: 'Lexend Deca' } }} focused/>
-                  </SettingsInput>
-                </Fade>
-                <Fade in={isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                  <ConfirmButton onClick={submitPassword}>confirmar</ConfirmButton>
-                </Fade>
-              </>
+            { isDeleteAccountDisplay ? (
+              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={deleteUserAccount}>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
             ):(
-              <Fade in={!isPasswordDisplay} timeout={{ enter: 500, exit: 500 }} unmountOnExit mountOnEnter>
-                <ChangeButton onClick={() => setIsPasswordDisplay(true)}>trocar</ChangeButton>
-              </Fade>
+              <DeleteButton onClick={() => setIsDeleteAccountDisplay(true)}>apagar minha conta e todas as informações permanentemente</DeleteButton>
             ) }
-          </Flexing>
-          <Spacing></Spacing>
-          { isDeleteFavListDisplay ? (
-            <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={unfavoriteAllPlaces}>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
-          ):(
-            <DeleteButton onClick={() => setIsDeleteFavListDisplay(true)}>limpar toda minha lista de favoritos permanentemente</DeleteButton>
-          ) }
-          { isDeleteAccountDisplay ? (
-            <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={deleteUserAccount}>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
-          ):(
-            <DeleteButton onClick={() => setIsDeleteAccountDisplay(true)}>apagar minha conta e todas as informações permanentemente</DeleteButton>
-          ) }
+          </div>
         </SettingsContent>
       </Grow>
     </HomepageLayout>

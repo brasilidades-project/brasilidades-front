@@ -77,7 +77,7 @@ export default function Homepage() {
         )}
       </TopBar>
       <Grow in={true} timeout={{ enter: 700, exit: 700 }} unmountOnExit mountOnEnter>  
-        <Map>
+        <Map isSelectDisplay={isSelectDisplay}>
           <MapBrazil onChange={setDistrict} bg='white' fill='black' colorStroke='lightgray' colorLabel='white' width={500} height={500} disabled={districtPlacesLoading} />
           { isSelectDisplay ? (
             <></>
@@ -92,8 +92,8 @@ export default function Homepage() {
                     <PlaceSuggestion onClick={() => { window.open(`mailto:${appEmail}?Subject=Sugest%E3o%20de%20lugar%20para%20o%20brasilidades&Body=O%20lugar%20que%20eu%20gostaria%20de%20sugerir%20%E9%3A%20...`); }}><IoIosAdd/><p>possui uma sugestão? envie um e-mail para nós!</p></PlaceSuggestion>
                   </Grow>
                 </Places>
+                <ScrollAd><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAd>
               </DistrictColumn>
-              <ScrollAd><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAd>
             </>
           )}
         </Map>

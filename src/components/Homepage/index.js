@@ -52,10 +52,10 @@ export const ScrollAd = styled.div`
   writing-mode: vertical-rl;
   width: 30px;
   position: absolute;
-  right: 40px;
+  right: 10px;
   box-sizing: border-box;
   margin-top: 40px;
-  color: black;
+  color: white;
   p {
     animation: color-change 1s 5;
     animation-delay: 1s;
@@ -67,6 +67,9 @@ export const ScrollAd = styled.div`
   }
   :hover{
     cursor: default;
+  }
+  @media (max-width: 1100px) {
+    display: none;
   }
 `;
 
@@ -109,8 +112,7 @@ export const ToClickDiv = styled.div`
 export const DistrictColumn = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 80px;
-  width: 700px;
+  width: 50%;
   height: 510px;
   animation: fadeIn 300ms;
   @keyframes fadeIn {
@@ -139,10 +141,10 @@ export const Places = styled.div`
 export const Map = styled.div`
   display: flex;
   width: 100vw;
-  justify-content: center;
+  max-width: 1400px;
+  justify-content: ${props => props.isSelectDisplay ? 'center':'space-between'};
   box-sizing: border-box;
-  padding: 80px 60px;
-  padding-left: 80px;
+  padding: 80px 40px;
   padding-bottom: 50px;
   position: relative;
 `;
