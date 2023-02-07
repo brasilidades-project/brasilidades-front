@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import Menu from '../../components/Homepage/Menu';
 import { Grow } from '@material-ui/core';
-import { FavoritesContent, FavoritesPlaces, FavoritesTitle, ScrollAdFav } from '../../components/Favorites';
+import { FavoritesContent, FavoritesPlaces, FavoritesTitle, NoneFavoritesPlaces, ScrollAdFav } from '../../components/Favorites';
 import PlaceData from '../../components/Homepage/PlaceData';
 import Place from '../../components/Homepage/Place';
 import { useNavigate } from 'react-router-dom';
@@ -58,10 +58,23 @@ export default function Favorites() {
         <FavoritesContent>
           <FavoritesTitle>favoritos</FavoritesTitle>
           <FavoritesPlaces>
-            <Places>
-              {placesArr.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id} setPlaceSelectedFav={setPlaceSelectedFav} />)}
-            </Places>
-            <ScrollAdFav><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAdFav>
+            { (placesArr.length > 0) ? (
+              <>
+                <Places>
+                  {placesArr.map((place, index) => <Place key={index} toggleGrow={toggleGrow} timeout={200*(index+1)} name={place.name} image={place.image} description={place.description} setPlaceSelected={setPlaceSelected} place={place} setIsPlaceDisplay={setIsPlaceDisplay} setSliderPlaceData={setSliderPlaceData} userId={userData.user.id} setPlaceSelectedFav={setPlaceSelectedFav} />)}
+                </Places>
+                <ScrollAdFav><p>deslize para ver mais {'>'}{'>'}{'>'}</p></ScrollAdFav>
+              </>
+            ):(
+              <>
+                <NoneFavoritesPlaces>
+                  <div onClick={() => navigate('/homepage')}> 
+                    <p>parece que você não tem favoritos ainda,</p>
+                    <p>clique aqui para pesquisar lugares para favoritar!</p>
+                  </div>
+                </NoneFavoritesPlaces>
+              </>
+            )}
           </FavoritesPlaces>
         </FavoritesContent>
       </Grow>

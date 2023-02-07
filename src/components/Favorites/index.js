@@ -22,6 +22,27 @@ export const FavoritesTitle = styled.div`
   }
 `;
 
+export const NoneFavoritesPlaces = styled.div`
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: lightgray;
+  p{
+    margin-bottom: 4px;
+  }
+  div{
+    width: fit-content;
+    text-align: center;
+    :hover{
+      color: white;
+      cursor: pointer;
+    }
+  }
+`;
+
 export const FavoritesPlaces = styled.div`
   display: flex;
   position: relative;
