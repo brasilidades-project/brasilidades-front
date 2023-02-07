@@ -23,6 +23,30 @@ export const ConfirmDeleteButton = styled.div`
   }
 `;
 
+export const ConfirmDeleteButtonCancel = styled.div`
+  background-color: black;
+  color: lightgray;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  height: 35px;
+  margin-bottom: 10px;
+  width: 49.5%;
+  :hover{
+    cursor: pointer;
+    border: 1px solid white;
+    background-color: white;
+    color: black;
+  }
+  animation: fade-in .5s;
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+`;
+
 export const ConfirmDeleteFlexing = styled.div`
   display: flex;
   width: 100%;

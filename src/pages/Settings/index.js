@@ -5,7 +5,7 @@ import { IoMdMenu } from 'react-icons/io';
 import { toast } from 'react-toastify';
 import Menu from '../../components/Homepage/Menu';
 import { Fade, Grow } from '@material-ui/core';
-import { CancelButton, ChangeButton, ConfirmButton, ConfirmDeleteButton, ConfirmDeleteFlexing, DeleteButton, Flexing, SettingsContent, SettingsInput, SettingsPasswordSubtitle, SettingsSubtitle, SettingsTitle, Spacing } from '../../components/Settings';
+import { CancelButton, ChangeButton, ConfirmButton, ConfirmDeleteButton, ConfirmDeleteButtonCancel, ConfirmDeleteFlexing, DeleteButton, Flexing, SettingsContent, SettingsInput, SettingsPasswordSubtitle, SettingsSubtitle, SettingsTitle, Spacing } from '../../components/Settings';
 import { WhiteBorderTextField } from '../../components/Settings/Input';
 import { useNavigate } from 'react-router-dom';
 import useEmailUpdate from '../../hooks/api/useEmailUpdate';
@@ -140,12 +140,12 @@ export default function Settings() {
           </div>
           <div>
             { isDeleteFavListDisplay ? (
-              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={unfavoriteAllPlaces}>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
+              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={unfavoriteAllPlaces}>limpar toda minha lista de favoritos</ConfirmDeleteButton><ConfirmDeleteButtonCancel onClick={() => setIsDeleteFavListDisplay(false)}>cancelar</ConfirmDeleteButtonCancel></ConfirmDeleteFlexing>
             ):(
               <DeleteButton onClick={() => setIsDeleteFavListDisplay(true)}>limpar toda minha lista de favoritos permanentemente</DeleteButton>
             ) }
             { isDeleteAccountDisplay ? (
-              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={deleteUserAccount}>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButton onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButton></ConfirmDeleteFlexing>
+              <ConfirmDeleteFlexing><ConfirmDeleteButton onClick={deleteUserAccount}>apagar a minha conta e todas as informações</ConfirmDeleteButton><ConfirmDeleteButtonCancel onClick={() => setIsDeleteAccountDisplay(false)}>cancelar</ConfirmDeleteButtonCancel></ConfirmDeleteFlexing>
             ):(
               <DeleteButton onClick={() => setIsDeleteAccountDisplay(true)}>apagar minha conta e todas as informações permanentemente</DeleteButton>
             ) }

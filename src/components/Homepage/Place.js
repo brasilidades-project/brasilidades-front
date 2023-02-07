@@ -59,9 +59,9 @@ export default function Place({ toggleGrow, name, timeout, image, description, p
           <Icons>
             <IconL onClick={() => { setPlaceSelected(place); setIsPlaceDisplay(true); setSliderPlaceData(true); if(isFavorite) {setPlaceSelectedFav(true);}else {setPlaceSelectedFav(false);} }}><div><IoMdSearch/></div><p>saber mais</p></IconL>
             { isFavorite ? (
-              <IconR onClick={unfavoritePlace} disabled={unfavoriteLoading}><div><IoIosStar/></div><p>desfavoritar</p></IconR>
+              <IconR onClick={() => { unfavoritePlace(); setPlaceSelectedFav(false); }} disabled={unfavoriteLoading}><div><IoIosStar/></div><p>desfavoritar</p></IconR>
             ):(
-              <IconR onClick={favoritePlace} disabled={favoriteLoading}><div><IoIosStar/></div><p>favoritar</p></IconR>
+              <IconR onClick={() => { favoritePlace(); setPlaceSelectedFav(true); }} disabled={favoriteLoading}><div><IoIosStar/></div><p>favoritar</p></IconR>
             ) }
           </Icons>
         </PlaceData>

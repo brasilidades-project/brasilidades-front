@@ -55,7 +55,7 @@ export const ScrollAd = styled.div`
   right: 10px;
   box-sizing: border-box;
   margin-top: 40px;
-  color: white;
+  color: black;
   p {
     animation: color-change 1s 5;
     animation-delay: 1s;

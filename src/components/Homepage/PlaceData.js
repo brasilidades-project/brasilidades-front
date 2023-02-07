@@ -12,6 +12,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import GoogleMap from './GoogleMap';
 import notfound from '../../assets/images/notfound.png';
+import { format, getDate, parseISO } from 'date-fns';
 
 export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSliderPlaceData, placeSelected, placeSelectedFav }) {
   return (
@@ -67,7 +68,7 @@ export default function PlaceData({ setIsPlaceDisplay, sliderPlaceData, setSlide
             <TopInfo>
               <Name>{placeSelected.name}</Name>
               <Localization><IoIosPin/><p>{placeSelected.city}</p></Localization>
-              <LastUpdate><IoIosTime/><p> atualizado em: {placeSelected.updatedAt}</p></LastUpdate>
+              <LastUpdate><IoIosTime/><p> atualizado em: {format(parseISO(placeSelected.updatedAt), 'dd/MM/yyyy ')}</p></LastUpdate>
             </TopInfo>
             <FeatureIcons>
               <CloseIcon onClick={() => {

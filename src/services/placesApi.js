@@ -5,6 +5,11 @@ export async function districtPlaces(district) {
   return response.data;
 }
 
+export async function favoritePlaces(userId) {
+  const response = await api.get(`/places/favorites/${userId}`);
+  return response.data;
+}
+
 export async function favorite(placeId, userId) {
   const response = await api.post('/places', { placeId, userId });
   return response.data;
