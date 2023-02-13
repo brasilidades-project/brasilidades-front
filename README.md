@@ -30,7 +30,7 @@ the brasilidades project came to help travel lovers discover the hidden wonders 
 
 ## screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/brasilidades-project/brasilidades-assets/blob/main/screenshot1.png?raw=true)
 
 
 ## run Locally
